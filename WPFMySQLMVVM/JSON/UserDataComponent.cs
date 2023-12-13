@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Xml;
@@ -12,7 +13,7 @@ namespace WPFJSONMVVM.JSON
     public class UserDataComponent
     {
         public static string Path = "C:\\Users\\Alumno\\Documents\\WPF\\WPFJSONMVVM\\WPFMySQLMVVM\\Data\\users.json";
-        public static List<User> readUsers()
+        public static ObservableCollection<User> readUsers()
         {
             string contenidoJson = File.ReadAllText(Path);
             RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(contenidoJson);
@@ -22,7 +23,7 @@ namespace WPFJSONMVVM.JSON
 
         public static void insertPeople(User p)
         {
-            List<User> users = readUsers();
+            ObservableCollection<User> users = readUsers();
             users.Add(p);
             RootObject rootObject = new RootObject();
             rootObject.Users = users;
@@ -33,7 +34,8 @@ namespace WPFJSONMVVM.JSON
         class RootObject
         {
             [JsonProperty("users")]
-            public List<Models.User> Users { get; set; }
+            public ObservableCollection<Models.User> Users { get; set; }
+            
         }
 
 

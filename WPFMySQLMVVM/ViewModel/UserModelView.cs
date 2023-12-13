@@ -79,7 +79,7 @@ namespace WPFJSONMVVM.ViewModel
 
         public void LoadUsers()
         {
-            users = new ObservableCollection<User>(UserDataComponent.readUsers());
+            users = UserDataComponent.readUsers();
         }
     }
 }
